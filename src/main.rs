@@ -1,5 +1,7 @@
 use leptos::*;
 
+use components::demo_control_flow::*;
+use components::demo_form_and_input::*;
 use components::demo_iteration::*;
 use components::*;
 
@@ -23,6 +25,9 @@ fn App() -> impl IntoView {
             </li>
             <li>
                 <DemoComplexDataIteration/>
+            </li>
+            <li>
+                <DemoFormAndInput/>
             </li>
         </ul>
     }

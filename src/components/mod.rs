@@ -1,4 +1,6 @@
 use leptos::*;
+pub mod demo_control_flow;
+pub mod demo_form_and_input;
 pub mod demo_iteration;
 
 #[component]
