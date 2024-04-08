@@ -1,5 +1,6 @@
 use leptos::*;
 
+use components::demo_iteration::*;
 use components::*;
 
 mod components;
@@ -11,11 +12,15 @@ fn main() {
 fn App() -> impl IntoView {
     view! {
         <ul>
-            <BasicComponent/>
-        </ul>
-
-        <ul>
-            <DynamicAttributes/>
+            <li>
+                <BasicComponent/>
+            </li>
+            <li>
+                <ComponentsAndProps/>
+            </li>
+            <li>
+                <DemoStaticView/>
+            </li>
         </ul>
     }
 }
