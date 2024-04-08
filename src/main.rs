@@ -19,7 +19,10 @@ fn App() -> impl IntoView {
                 <ComponentsAndProps/>
             </li>
             <li>
-                <DemoStaticView/>
+                <DemoBasicIteration/>
+            </li>
+            <li>
+                <DemoComplexDataIteration/>
             </li>
         </ul>
     }

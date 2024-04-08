@@ -1,7 +1,7 @@
 use leptos::*;
 
 #[component]
-pub fn DemoStaticView() -> impl IntoView {
+pub fn DemoBasicIteration() -> impl IntoView {
     let values = vec![0, 1, 2];
 
     // create a list of 5 signals
@@ -21,7 +21,7 @@ pub fn DemoStaticView() -> impl IntoView {
         .collect_view();
 
     view! {
-        <h1>"Demo iteration: static views with Vec<_>"</h1>
+        <h1>"Demo iteration: static views and dynamic views"</h1>
         <h2>"Static List"</h2>
         <p>{values.clone()}</p>
         // or we can wrap them in <li>
@@ -125,5 +125,72 @@ fn DynamicList(
 
             </ul>
         </div>
+    }
+}
+
+#[derive(Debug, Clone)]
+struct DatabaseEntry {
+    key: String,
+    value: i32,
+}
+
+#[component]
+pub fn DemoComplexDataIteration() -> impl IntoView {
+    // start with a set of three rows
+    let (data, set_data) = create_signal(vec![
+        DatabaseEntry {
+            key: "foo".to_string(),
+            value: 10,
+        },
+        DatabaseEntry {
+            key: "bar".to_string(),
+            value: 20,
+        },
+        DatabaseEntry {
+            key: "baz".to_string(),
+            value: 15,
+        },
+    ]);
+
+    view! {
+        <h1>Demo iterating over mote complex data</h1>
+
+        // when we click, update each row,
+        // doubling its value
+        <button on:click=move |_| {
+            set_data
+                .update(|data| {
+                    for row in data {
+                        row.value *= 2;
+                    }
+                });
+            logging::log!("{:?}", data.get());
+        }>"Update Values"</button>
+        <p>"This won't work because each.value is not reactive type"</p>
+        <For
+            each=data
+            key=|each| each.key.clone()
+            children=move |each| {
+                view! { <p>{each.value}</p> }
+            }
+        />
+
+        // iterate over the rows and display each value
+        // <For each=data key=|state| state.key.clone() let:child>
+        // <p>{child.value}</p>
+        // </For>
+        <p>
+            "Use `create_momo` to create a derived computation that only triggers a reactive update when its value has changed"
+        </p>
+        <For
+            each=move || data().into_iter().enumerate()
+            key=|(_index, state)| state.key.clone()
+            children=move |(index, _)| {
+                let value = create_memo(move |_| {
+                    data.with(|data| data.get(index).map(|d| d.value).unwrap_or(0))
+                });
+                view! { <p>{value}</p> }
+            }
+        />
     }
 }
