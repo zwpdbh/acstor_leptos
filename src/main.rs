@@ -1,8 +1,11 @@
 use leptos::*;
 
 use components::demo_control_flow::*;
+use components::demo_error_handling::*;
 use components::demo_form_and_input::*;
 use components::demo_iteration::*;
+use components::demo_parent_children_communication::*;
+
 use components::*;
 
 mod components;
@@ -28,6 +31,15 @@ fn App() -> impl IntoView {
             </li>
             <li>
                 <DemoFormAndInput/>
+            </li>
+            <li>
+                <DemoControlFlow/>
+            </li>
+            <li>
+                <DemoErrorHandling/>
+            </li>
+            <li>
+                <DemoParentChildrenCommunication/>
             </li>
         </ul>
     }
