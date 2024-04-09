@@ -5,7 +5,7 @@ use components::demo_error_handling::*;
 use components::demo_form_and_input::*;
 use components::demo_iteration::*;
 use components::demo_parent_children_communication::*;
-
+use components::demo_reactivity::*;
 use components::*;
 
 mod components;
@@ -40,6 +40,9 @@ fn App() -> impl IntoView {
             </li>
             <li>
                 <DemoParentChildrenCommunication/>
+            </li>
+            <li>
+                <DemoReactivity/>
             </li>
         </ul>
     }
