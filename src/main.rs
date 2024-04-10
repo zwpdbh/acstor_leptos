@@ -1,5 +1,6 @@
 use leptos::*;
 
+use components::demo_async::*;
 use components::demo_control_flow::*;
 use components::demo_error_handling::*;
 use components::demo_form_and_input::*;
@@ -43,6 +44,9 @@ fn App() -> impl IntoView {
             </li>
             <li>
                 <DemoReactivity/>
+            </li>
+            <li>
+                <DemoAsync/>
             </li>
         </ul>
     }
