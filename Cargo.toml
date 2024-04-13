@@ -7,3 +7,4 @@ edition = "2021"
 leptos = { version = "0.6.9", features = ["csr", "nightly"] }
 gloo-timers = { version = "0.3", features = ["futures"] }
 uuid = { version = "1", features = ["v4"] }
+leptos_router = { version = "0.6.11", features = ["csr"] }
