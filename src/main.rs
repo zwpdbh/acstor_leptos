@@ -18,9 +18,11 @@ fn main() {
 #[component]
 fn App() -> impl IntoView {
     view! {
+        <h1>Leptos demos</h1>
         <Router>
             <nav>
                 <ul>
+
                     <li>
                         <a href="/demos/basic_component">basic components</a>
                     </li>
