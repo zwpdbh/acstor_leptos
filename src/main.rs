@@ -8,6 +8,7 @@ use components::demo_form_and_input::*;
 use components::demo_iteration::*;
 use components::demo_parent_children_communication::*;
 use components::demo_reactivity::*;
+use components::demo_route::*;
 use components::*;
 
 mod components;
@@ -52,6 +53,9 @@ fn App() -> impl IntoView {
                     <li>
                         <a href="/demos/control_flow">demo control flow</a>
                     </li>
+                    <li>
+                        <a href="/demos/route">demo route</a>
+                    </li>
                 </ul>
 
             </nav>
@@ -70,6 +74,7 @@ fn App() -> impl IntoView {
                     />
                     <Route path="/demos/demo_async" view=DemoAsync/>
                     <Route path="/demos/control_flow" view=DemoControlFlow/>
+                    <Route path="/demos/route" view=DemoRoute/>
                     <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
                 </Routes>
 
