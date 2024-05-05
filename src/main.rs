@@ -65,9 +65,10 @@ pub fn DemoIndex() -> impl IntoView {
 pub fn DemoDetail() -> impl IntoView {
     // we can access the :id param reactively with `use_params_map`.
     let params = use_params_map();
-    let id = move || params.with(|params| params.get("id").cloned().unwrap_or_default());
+    let demo_name =
+        move || params.with(|params| params.get("demo_name").cloned().unwrap_or_default());
 
-    let component = move || match id().as_str() {
+    let component = move || match demo_name().as_str() {
         "basic_component" => view! { <BasicComponent/> },
         "components_and_pros" => view! { <ComponentsAndProps/> },
         "demo_basic_iteration" => view! { <DemoBasicIteration/> },
@@ -104,9 +105,14 @@ fn App() -> impl IntoView {
                 <Routes>
 
                     <Route path="/" view=|| view! { <h2>"Home"</h2> }/>
-                    <Route path="/demos" view=DemoIndex>
 
-                        <Route path=":id" view=DemoDetail/>
+                    <Route path="/demos" view=DemoIndex>
+                        <Route path=":demo_name" view=DemoDetail>
+                            <Route path="" view=DemoDetail/>
+                            <RoutesForDemoNestedRoute/>
+                        </Route>
+                        // <Route path=":demo_name" view=DemoDetail/>
+
                         <Route
                             path=""
                             view=|| {
@@ -119,7 +125,6 @@ fn App() -> impl IntoView {
                         />
 
                     </Route>
-
                     <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
                 </Routes>
 

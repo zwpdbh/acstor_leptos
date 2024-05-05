@@ -4,38 +4,31 @@ use leptos_router::*;
 #[component(transparent)]
 pub fn RoutesForDemoNestedRoute() -> impl IntoView {
     view! {
-        <Routes>
-            // / just has an un-nested "Home"
-            <Route path="/" view=|| view! { <h3>"Home"</h3> }/>
-            // /contacts has nested routes
-            <Route path="/contacts" view=ContactList>
-                // if no id specified, fall back
-                <Route path=":id" view=ContactInfo>
-                    <Route path="" view=|| view! { <div class="tab">"(Contact Info)"</div> }/>
-                    <Route
-                        path="conversations"
-                        view=|| view! { <div class="tab">"(Conversations)"</div> }
-                    />
-                </Route>
-                // if no id specified, fall back
+        <Route path="contacts" view=ContactList>
+            // if no id specified, fall back
+            <Route path=":id" view=ContactInfo>
+                <Route path="" view=|| view! { <div class="tab">"(Contact Info)"</div> }/>
                 <Route
-                    path=""
-                    view=|| {
-                        view! {
-                            <div class="select-user">"Select a user to view contact info."</div>
-                        }
-                    }
+                    path="conversations"
+                    view=|| view! { <div class="tab">"(Conversations)"</div> }
                 />
-
             </Route>
-        </Routes>
+            // if no id specified, fall back
+            <Route
+                path=""
+                view=|| {
+                    view! { <div class="select-user">"Select a user to view contact info."</div> }
+                }
+            />
+
+        </Route>
     }
 }
 
 #[component]
 pub fn DemoNestedRoute() -> impl IntoView {
     view! {
-        <h1>Demo nested route</h1>
+        <h3>Demo nested route</h3>
 
         <ul>
             <li>
@@ -45,6 +38,11 @@ pub fn DemoNestedRoute() -> impl IntoView {
                 <A href="contacts">"Contacts"</A>
             </li>
         </ul>
+
+        // <Outlet/> will show the nested child route
+        // we can position this outlet wherever we want
+        // within the layout
+        <Outlet/>
     }
 }
 
