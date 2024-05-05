@@ -80,7 +80,7 @@ fn ContactList() -> impl IntoView {
 
 #[component]
 fn ContactInfo() -> impl IntoView {
-    // we can access the :id param reactively with `use_params_map`
+    // we can access the :id param reactively with `use_params_map`.
     let params = use_params_map();
     let id = move || params.with(|params| params.get("id").cloned().unwrap_or_default());
 
