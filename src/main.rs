@@ -6,9 +6,9 @@ use components::demo_control_flow::*;
 use components::demo_error_handling::*;
 use components::demo_form_and_input::*;
 use components::demo_iteration::*;
+use components::demo_nested_route::*;
 use components::demo_parent_children_communication::*;
 use components::demo_reactivity::*;
-use components::demo_route::*;
 use components::*;
 
 mod components;
@@ -50,7 +50,7 @@ pub fn DemoIndex() -> impl IntoView {
                 <A href="control_flow">demo control flow</A>
             </li>
             <li>
-                <A href="nested_route">demo nested route</A>
+                <A href="demo_nested_route">demo nested route</A>
             </li>
         </ul>
 
@@ -71,6 +71,13 @@ pub fn DemoDetail() -> impl IntoView {
         "basic_component" => view! { <BasicComponent/> },
         "components_and_pros" => view! { <ComponentsAndProps/> },
         "demo_basic_iteration" => view! { <DemoBasicIteration/> },
+        "demo_form_and_input" => view! { <DemoFormAndInput/> },
+        "demo_error_handling" => view! { <DemoErrorHandling/> },
+        "demo_reactivity" => view! { <DemoReactivity/> },
+        "demo_parent_children_communication" => view! { <DemoParentChildrenCommunication/> },
+        "demo_async" => view! { <DemoAsync/> },
+        "control_flow" => view! { <DemoControlFlow/> },
+        "demo_nested_route" => view! { <DemoNestedRoute/> },
         _ => view! { <MessageComponent/> },
     };
 
@@ -95,10 +102,11 @@ fn App() -> impl IntoView {
             <main>
                 // all our routes will appear inside <main>
                 <Routes>
+
                     <Route path="/" view=|| view! { <h2>"Home"</h2> }/>
                     <Route path="/demos" view=DemoIndex>
-                        <Route path=":id" view=DemoDetail/>
 
+                        <Route path=":id" view=DemoDetail/>
                         <Route
                             path=""
                             view=|| {
@@ -111,19 +119,7 @@ fn App() -> impl IntoView {
                         />
 
                     </Route>
-                    // <Route path="/demos/basic_component" view=BasicComponent/>
-                    // <Route path="/demos/components_and_pros" view=ComponentsAndProps/>
-                    // <Route path="/demos/demo_basic_iteration" view=DemoBasicIteration/>
-                    // <Route path="/demos/demo_form_and_input" view=DemoFormAndInput/>
-                    // <Route path="/demos/demo_error_handling" view=DemoErrorHandling/>
-                    // <Route path="/demos/demo_reactivity" view=DemoReactivity/>
-                    // <Route
-                    // path="/demos/demo_parent_children_communication"
-                    // view=DemoParentChildrenCommunication
-                    // />
-                    // <Route path="/demos/demo_async" view=DemoAsync/>
-                    // <Route path="/demos/control_flow" view=DemoControlFlow/>
-                    // <Route path="/demos/route" view=DemoRoute/>
+
                     <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
                 </Routes>
 

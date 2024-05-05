@@ -1,14 +1,13 @@
 use leptos::*;
-use leptos_router::use_params_map;
 
 pub mod demo_async;
 pub mod demo_control_flow;
 pub mod demo_error_handling;
 pub mod demo_form_and_input;
 pub mod demo_iteration;
+pub mod demo_nested_route;
 pub mod demo_parent_children_communication;
 pub mod demo_reactivity;
-pub mod demo_route;
 
 #[component]
 pub fn MessageComponent() -> impl IntoView {
