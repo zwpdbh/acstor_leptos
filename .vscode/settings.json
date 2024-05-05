@@ -1,11 +1,6 @@
 {
-  // "rust-analyzer.cargo.features": [
-  //   "ssr"
-  // ],
   "rust-analyzer.procMacro.ignored": {
     "leptos_macro": [
-      // optional:
-      // "component",
       "server"
     ],
   },
@@ -14,16 +9,11 @@
     "--stdin",
     "--rustfmt"
   ],
-  // For RUST Leptos
   "files.associations": {
     "*.rs": "rust",
-    "*.heex": "phoenix-heex",
-    "*.eex": "phoenix-heex"
   },
   "tailwindCSS.includeLanguages": {
     "rust": "html",
-    "phoenix-heex": "html",
-    "elixir": "html",
   },
   "tailwindCSS.experimental.classRegex": [
     "class: \"(.*)\""
@@ -31,8 +21,6 @@
   "emmet.showAbbreviationSuggestions": true,
   "emmet.includeLanguages": {
     "rust": "html",
-    "phoenix-heex": "html",
-    "html-eex": "html"
   },
   "editor.quickSuggestions": {
     "comments": "inline",
