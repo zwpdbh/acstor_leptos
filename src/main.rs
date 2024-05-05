@@ -23,36 +23,41 @@ pub fn DemoIndex() -> impl IntoView {
 
         <ul>
             <li>
-                <a href="/demos/:basic_component">basic components</a>
+                <A href="basic_component">basic components</A>
             </li>
-        // <li>
-        // <a href="/demos/components_and_pros">components and props</a>
-        // </li>
-        // <li>
-        // <a href="/demos/demo_basic_iteration">basic iterator</a>
-        // </li>
-        // <li>
-        // <a href="/demos/demo_form_and_input">form and input</a>
-        // </li>
-        // <li>
-        // <a href="/demos/demo_error_handling">error handling</a>
-        // </li>
-        // <li>
-        // <a href="/demos/demo_reactivity">reactivity</a>
-        // </li>
-        // <li>
-        // <a href="/demos/demo_parent_children_communication">parent child communication</a>
-        // </li>
-        // <li>
-        // <a href="/demos/demo_async">demo async</a>
-        // </li>
-        // <li>
-        // <a href="/demos/control_flow">demo control flow</a>
-        // </li>
-        // <li>
-        // <a href="/demos/route">demo route</a>
-        // </li>
+            <li>
+                <A href="components_and_pros">components and props</A>
+            </li>
+            <li>
+                <A href="demo_basic_iteration">basic iterator</A>
+            </li>
+            <li>
+                <A href="demo_form_and_input">form and input</A>
+            </li>
+            <li>
+                <A href="demo_error_handling">error handling</A>
+            </li>
+            <li>
+                <A href="demo_reactivity">reactivity</A>
+            </li>
+            <li>
+                <A href="demo_parent_children_communication">parent child communication</A>
+            </li>
+            <li>
+                <A href="demo_async">demo async</A>
+            </li>
+            <li>
+                <A href="control_flow">demo control flow</A>
+            </li>
+            <li>
+                <A href="nested_route">demo nested route</A>
+            </li>
         </ul>
+
+        // <Outlet/> will show the nested child route
+        // we can position this outlet wherever we want
+        // within the layout
+        <Outlet/>
     }
 }
 
@@ -64,10 +69,12 @@ pub fn DemoDetail() -> impl IntoView {
 
     let component = move || match id().as_str() {
         "basic_component" => view! { <BasicComponent/> },
+        "components_and_pros" => view! { <ComponentsAndProps/> },
+        "demo_basic_iteration" => view! { <DemoBasicIteration/> },
         _ => view! { <MessageComponent/> },
     };
 
-    component
+    component.into_view()
 }
 
 #[component]
