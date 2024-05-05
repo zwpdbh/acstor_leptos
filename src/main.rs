@@ -78,7 +78,6 @@ pub fn DemoDetail() -> impl IntoView {
         "demo_parent_children_communication" => view! { <DemoParentChildrenCommunication/> },
         "demo_async" => view! { <DemoAsync/> },
         "control_flow" => view! { <DemoControlFlow/> },
-        "demo_nested_route" => view! { <DemoNestedRoute/> },
         _ => view! { <MessageComponent/> },
     };
 
@@ -104,15 +103,13 @@ fn App() -> impl IntoView {
                 // all our routes will appear inside <main>
                 <Routes>
 
-                    <Route path="/" view=|| view! { <h2>"Home"</h2> }/>
-
+                    <Route path="/" view=|| view! { <h2>"Home Page"</h2> }/>
                     <Route path="/demos" view=DemoIndex>
+                        <RoutesForDemoNestedRoute/>
                         <Route path=":demo_name" view=DemoDetail>
                             <Route path="" view=DemoDetail/>
-                            <RoutesForDemoNestedRoute/>
-                        </Route>
-                        // <Route path=":demo_name" view=DemoDetail/>
 
+                        </Route>
                         <Route
                             path=""
                             view=|| {

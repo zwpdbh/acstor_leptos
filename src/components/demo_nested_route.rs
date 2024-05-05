@@ -4,23 +4,31 @@ use leptos_router::*;
 #[component(transparent)]
 pub fn RoutesForDemoNestedRoute() -> impl IntoView {
     view! {
-        <Route path="contacts" view=ContactList>
-            // if no id specified, fall back
-            <Route path=":id" view=ContactInfo>
-                <Route path="" view=|| view! { <div class="tab">"(Contact Info)"</div> }/>
-                <Route
-                    path="conversations"
-                    view=|| view! { <div class="tab">"(Conversations)"</div> }
-                />
-            </Route>
-            // if no id specified, fall back
-            <Route
-                path=""
-                view=|| {
-                    view! { <div class="select-user">"Select a user to view contact info."</div> }
-                }
-            />
+        <Route path="demo_nested_route" view=DemoNestedRoute>
 
+            <Route path="home" view=|| view! { <h3>"Nested Route Home"</h3> }/>
+            <Route path="contacts" view=ContactList>
+                // if no id specified, fall back
+                <Route path=":id" view=ContactInfo>
+                    <Route path="" view=|| view! { <div class="tab">"(Contact Info)"</div> }/>
+                    <Route
+                        path="conversations"
+                        view=|| view! { <div class="tab">"(Conversations)"</div> }
+                    />
+                </Route>
+                // if no id specified, fall back
+                <Route
+                    path=""
+                    view=|| {
+                        view! {
+                            <div class="select-user">"Select a user to view contact info."</div>
+                        }
+                    }
+                />
+
+            </Route>
+
+            <Route path="" view=|| view! { <p>"Select to see more"</p> }/>
         </Route>
     }
 }
@@ -53,9 +61,19 @@ fn ContactList() -> impl IntoView {
             // here's our contact list component itself
             <h3>"Contacts"</h3>
             <div class="contact-list-contacts">
-                <A href="alice">"Alice"</A>
-                <A href="bob">"Bob"</A>
-                <A href="steve">"Steve"</A>
+                <ul>
+                    <li>
+                        <A href="alice">"Alice"</A>
+                    </li>
+                    <li>
+
+                        <A href="bob">"Bob"</A>
+                    </li>
+                    <li>
+                        <A href="steve">"Steve"</A>
+                    </li>
+                </ul>
+
             </div>
 
             // <Outlet/> will show the nested child route
