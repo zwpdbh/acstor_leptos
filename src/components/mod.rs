@@ -1,13 +1,29 @@
 use leptos::*;
 
+pub mod demo_async;
+pub mod demo_control_flow;
+pub mod demo_error_handling;
+pub mod demo_form_and_input;
+pub mod demo_iteration;
+pub mod demo_nested_route;
+pub mod demo_parent_children_communication;
+pub mod demo_reactivity;
+
+#[component]
+pub fn MessageComponent() -> impl IntoView {
+    view! { <p>"ComponentNotFound"</p> }
+}
+
 #[component]
 pub fn BasicComponent() -> impl IntoView {
     view! {
-        <h2>Basic Component</h2>
+        <h1>"Basic Component (3.1 and 3.2)"</h1>
         <Counter/>
+        <DynamicAttributes/>
     }
 }
 
+/// For shows examples from 3.1
 #[component]
 pub fn Counter() -> impl IntoView {
     let (count, set_count) = create_signal(0);
@@ -23,6 +39,7 @@ pub fn Counter() -> impl IntoView {
     }
 }
 
+/// For shows examples from 3.2
 #[component]
 pub fn DynamicAttributes() -> impl IntoView {
     let (count, set_count) = create_signal(0);
@@ -44,7 +61,7 @@ pub fn DynamicAttributes() -> impl IntoView {
                     class=("button-20", move || count() % 2 == 1)
                 >
 
-                    "Click me: "
+                    "Click me to change progress bar: "
                     {move || count}
                 </button>
             </li>
@@ -105,4 +122,62 @@ pub fn DynamicAttributes() -> impl IntoView {
             </li>
         </ol>
     }
+}
+
+#[component]
+pub fn ComponentsAndProps() -> impl IntoView {
+    let (count, set_count) = create_signal(0);
+    let double_count = move || count() * 2;
+    view! {
+        <h1>Components And Props</h1>
+
+        // now we use our component!
+        <ul>
+            <p>The following example shows how we pass the progress prop</p>
+            <button on:click=move |_| {
+                set_count.update(|n| *n += 1);
+            }>"Click me"</button>
+
+            <li>
+                <ProgressBarV1 progress=count/>
+            </li>
+            <li>
+                <ProgressBarV1 progress=double_count/>
+            </li>
+            <p>"Show the use of #[prop(into)]"</p>
+            <li>
+                <ProgressBarV2 progress=count/>
+            </li>
+            <li>
+                <ProgressBarV2 progress=Signal::derive(double_count)/>
+            </li>
+        </ul>
+    }
+}
+
+/// If a component property that will change over time, we need to pass the prop as signal.
+#[component]
+pub fn ProgressBarV1<F>(
+    // mark this prop optional
+    // you can specify it or not when you use <ProgressBar/>
+    #[prop(default = 100)] max: u16,
+    progress: F,
+) -> impl IntoView
+where
+    F: Fn() -> i32 + 'static,
+{
+    view! { <progress max=max value=progress></progress> }
+}
+
+/// "#[prop(into)]"" can be useful when defining APIs for components you’ll want to reuse while passing different sorts of signals.
+#[component]
+fn ProgressBarV2(
+    /// The maximum value of the progress bar.
+    #[prop(default = 100)]
+    max: u16,
+    /// How much progress should be displayed.
+    #[prop(into)]
+    progress: Signal<i32>,
+) -> impl IntoView {
+    view! { <progress max=max value=progress></progress> }
 }
