@@ -99,7 +99,7 @@ fn App() -> impl IntoView {
                     </li>
                 </ul>
             </nav>
-            <main>
+            <main class="my-0 mx-auto max-w-3xl text-center">
                 // all our routes will appear inside <main>
                 <Routes>
 
