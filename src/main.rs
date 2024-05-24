@@ -87,45 +87,50 @@ pub fn DemoDetail() -> impl IntoView {
 #[component]
 fn App() -> impl IntoView {
     view! {
-        <h1>Leptos demos nav</h1>
-        <Router>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/demos">Demo Index</a>
-                    </li>
-                </ul>
-            </nav>
-            <main class="my-0 mx-auto max-w-3xl text-center">
-                // all our routes will appear inside <main>
-                <Routes>
+        <div class="flex">
 
-                    <Route path="/" view=|| view! { <h2>"Home Page"</h2> }/>
-                    <Route path="/demos" view=DemoIndex>
-                        <RoutesForDemoNestedRoute/>
-                        <Route path=":demo_name" view=DemoDetail>
-                            <Route path="" view=DemoDetail/>
+            <Router>
+                <nav class="fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-gray-900 text-white shadow">
+                    <div>
+                        <ul>
+                            <li>
+                                <a href="/">"Home"</a>
+                            </li>
+                            <li>
+                                <a href="/demos">"Demos"</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main class="my-0 mx-auto max-w-3xl text-center ">
+                    // all our routes will appear inside <main>
+                    <Routes>
+
+                        <Route path="/" view=|| view! { <h2>"Home Page"</h2> }/>
+                        <Route path="/demos" view=DemoIndex>
+                            <RoutesForDemoNestedRoute/>
+                            <Route path=":demo_name" view=DemoDetail>
+                                <Route path="" view=DemoDetail/>
+
+                            </Route>
+                            <Route
+                                path=""
+                                view=|| {
+                                    view! {
+                                        <div class="select-demo">
+                                            "Select a demo to see the details."
+                                        </div>
+                                    }
+                                }
+                            />
 
                         </Route>
-                        <Route
-                            path=""
-                            view=|| {
-                                view! {
-                                    <div class="select-demo">
-                                        "Select a demo to see the details."
-                                    </div>
-                                }
-                            }
-                        />
+                        <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
+                    </Routes>
 
-                    </Route>
-                    <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
-                </Routes>
-
-            </main>
-        </Router>
+                </main>
+            </Router>
+        </div>
     }
 }
