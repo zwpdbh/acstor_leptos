@@ -14,6 +14,7 @@
   },
   "tailwindCSS.includeLanguages": {
     "rust": "html",
+    "*.rs": "html"
   },
   "tailwindCSS.experimental.classRegex": [
     "class: \"(.*)\""
@@ -21,10 +22,12 @@
   "emmet.showAbbreviationSuggestions": true,
   "emmet.includeLanguages": {
     "rust": "html",
+    "*.rs": "html"
   },
   "editor.quickSuggestions": {
     "comments": "inline",
     "strings": "on",
     "other": "on"
   },
+  "css.validate": false,
 }
