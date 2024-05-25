@@ -17,52 +17,54 @@ fn main() {
 }
 
 #[component]
-pub fn DemoIndex() -> impl IntoView {
+pub fn DemoNav() -> impl IntoView {
     view! {
-        <h2>Demo index</h2>
+        <div class="fixed inset-y-0 left-0  bg-blue text-white p-4 transition-transform transform -translate-x-full md:translate-x-0 pt-16">
+            <h2>Demo index</h2>
 
-        <ul>
-            <li>
-                <A href="basic_component">basic components</A>
-            </li>
-            <li>
-                <A href="components_and_pros">components and props</A>
-            </li>
-            <li>
-                <A href="demo_basic_iteration">basic iterator</A>
-            </li>
-            <li>
-                <A href="demo_form_and_input">form and input</A>
-            </li>
-            <li>
-                <A href="demo_error_handling">error handling</A>
-            </li>
-            <li>
-                <A href="demo_reactivity">reactivity</A>
-            </li>
-            <li>
-                <A href="demo_parent_children_communication">parent child communication</A>
-            </li>
-            <li>
-                <A href="demo_async">demo async</A>
-            </li>
-            <li>
-                <A href="control_flow">demo control flow</A>
-            </li>
-            <li>
-                <A href="demo_nested_route">demo nested route</A>
-            </li>
-        </ul>
+            <ul>
+                <li>
+                    <A href="basic_component">basic components</A>
+                </li>
+                <li>
+                    <A href="components_and_pros">components and props</A>
+                </li>
+                <li>
+                    <A href="demo_basic_iteration">basic iterator</A>
+                </li>
+                <li>
+                    <A href="demo_form_and_input">form and input</A>
+                </li>
+                <li>
+                    <A href="demo_error_handling">error handling</A>
+                </li>
+                <li>
+                    <A href="demo_reactivity">reactivity</A>
+                </li>
+                <li>
+                    <A href="demo_parent_children_communication">parent child communication</A>
+                </li>
+                <li>
+                    <A href="demo_async">demo async</A>
+                </li>
+                <li>
+                    <A href="control_flow">demo control flow</A>
+                </li>
+                <li>
+                    <A href="demo_nested_route">demo nested route</A>
+                </li>
+            </ul>
 
-        // <Outlet/> will show the nested child route
-        // we can position this outlet wherever we want
-        // within the layout
-        <Outlet/>
+            // <Outlet/> will show the nested child route
+            // we can position this outlet wherever we want
+            // within the layout
+            <Outlet/>
+        </div>
     }
 }
 
 #[component]
-pub fn DemoDetail() -> impl IntoView {
+pub fn DemoList() -> impl IntoView {
     // we can access the :id param reactively with `use_params_map`.
     let params = use_params_map();
     let demo_name =
@@ -87,43 +89,48 @@ pub fn DemoDetail() -> impl IntoView {
 #[component]
 fn App() -> impl IntoView {
     view! {
-        <h1>Leptos demos nav</h1>
         <Router>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/demos">Demo Index</a>
-                    </li>
-                </ul>
-            </nav>
-            <main class="my-0 mx-auto max-w-3xl text-center">
-                // all our routes will appear inside <main>
-                <Routes>
+            <header class="w-full  bg-purple text-white p-4 fixed top-0 z-50">
+                <div class="w-3/4">
+                    <ul class="flex justify-evenly">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/demos">Demo Index</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <Route path="/" view=|| view! { <h2>"Home Page"</h2> }/>
-                    <Route path="/demos" view=DemoIndex>
-                        <RoutesForDemoNestedRoute/>
-                        <Route path=":demo_name" view=DemoDetail>
-                            <Route path="" view=DemoDetail/>
+            </header>
+
+            <main class="">
+                <div>
+                    // all our routes will appear inside <main>
+                    <Routes>
+
+                        <Route path="/" view=|| view! { <h2>"Home Page"</h2> }/>
+                        <Route path="/demos" view=DemoNav>
+                            <RoutesForDemoNestedRoute/>
+                            <Route path=":demo_name" view=DemoList>
+                                <Route path="" view=DemoList/>
+                            </Route>
+
+                            <Route
+                                path=""
+                                view=|| {
+                                    view! {
+                                        <div class="select-demo">
+                                            "Select a demo to see the details."
+                                        </div>
+                                    }
+                                }
+                            />
 
                         </Route>
-                        <Route
-                            path=""
-                            view=|| {
-                                view! {
-                                    <div class="select-demo">
-                                        "Select a demo to see the details."
-                                    </div>
-                                }
-                            }
-                        />
-
-                    </Route>
-                    <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
-                </Routes>
+                        <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
+                    </Routes>
+                </div>
 
             </main>
         </Router>
