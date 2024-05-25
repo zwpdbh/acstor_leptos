@@ -60,7 +60,9 @@ pub fn DemoNavList() -> impl IntoView {
         // within the layout
 
         </div>
-        <Outlet/>
+        <div class="bg-gray w-full">
+            <Outlet/>
+        </div>
     }
 }
 
@@ -85,15 +87,6 @@ pub fn DemoDetail() -> impl IntoView {
     };
 
     component.into_view()
-}
-
-#[component]
-pub fn DemoDetailDiv() -> impl IntoView {
-    view! {
-        <div class="bg-gray w-full">
-            <DemoDetail/>
-        </div>
-    }
 }
 
 #[component]
@@ -124,32 +117,29 @@ fn App() -> impl IntoView {
             </header>
 
             <main>
-                <div>
-                    // all our routes will appear inside <main>
-                    <Routes>
-                        <Route path="/" view=HomePageDiv/>
-                        <Route path="/demos" view=DemoNavList>
-                            <RoutesForDemoNestedRoute/>
-                            <Route path=":demo_name" view=DemoDetailDiv>
-                                <Route path="" view=DemoDetailDiv/>
-                            </Route>
-
-                            <Route
-                                path=""
-                                view=|| {
-                                    view! {
-                                        <div class="select-demo">
-                                            "Select a demo to see the details."
-                                        </div>
-                                    }
-                                }
-                            />
-
+                // all our routes will appear inside <main>
+                <Routes>
+                    <Route path="/" view=HomePageDiv/>
+                    <Route path="/demos" view=DemoNavList>
+                        <RoutesForDemoNestedRoute/>
+                        <Route path=":demo_name" view=DemoDetail>
+                            <Route path="" view=DemoDetail/>
                         </Route>
-                        <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
-                    </Routes>
-                </div>
 
+                        <Route
+                            path=""
+                            view=|| {
+                                view! {
+                                    <div class="fixed bg-gray w-full pt-50 mt-50">
+                                        "Select a demo to see the details."
+                                    </div>
+                                }
+                            }
+                        />
+
+                    </Route>
+                    <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
+                </Routes>
             </main>
         </Router>
     }
