@@ -16,10 +16,26 @@ fn main() {
     mount_to_body(|| view! { <App/> })
 }
 
+fn css_global_scope() -> String {
+    "min-h-screen flex flex-col".to_string()
+}
+
+fn css_main_content() -> String {
+    "flex min-h-screen".to_string()
+}
+
+fn css_left_content_sidebar() -> String {
+    "bg-blue  bg-white p-4".to_string()
+}
+
+fn css_right_content_detail() -> String {
+    "bg-gray bg-gray-200 p-4 flex-grow".to_string()
+}
+
 #[component]
 pub fn DemoNavList() -> impl IntoView {
     view! {
-        <div class="fixed inset-y-0 left-0  bg-blue text-white p-4 pt-16">
+        <div class=css_left_content_sidebar()>
             <h2>Demo index</h2>
 
             <ul>
@@ -60,7 +76,7 @@ pub fn DemoNavList() -> impl IntoView {
         // within the layout
 
         </div>
-        <div class="bg-gray w-full">
+        <div class=css_right_content_detail()>
             <Outlet/>
         </div>
     }
@@ -92,7 +108,7 @@ pub fn DemoDetail() -> impl IntoView {
 #[component]
 pub fn HomePageDiv() -> impl IntoView {
     view! {
-        <div class="bg-gray fixed inset-y-0 left-0 text-white p-4 pt-16 w-full">
+        <div class=css_right_content_detail()>
             <h2>"Home Page"</h2>
         </div>
     }
@@ -101,46 +117,48 @@ pub fn HomePageDiv() -> impl IntoView {
 #[component]
 fn App() -> impl IntoView {
     view! {
-        <Router>
-            <header class="w-full  bg-purple text-white p-4 fixed top-0 z-50">
-                <div class="w-3/4">
-                    <ul class="flex justify-evenly">
-                        <li>
-                            <a href="/">Home</a>
-                        </li>
-                        <li>
-                            <a href="/demos">Leptos frontend demos</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class=css_global_scope()>
+            <Router>
+                <header class="bg-purple p-4">
+                    <div class="w-3/4 text-yellow">
+                        <ul class="flex justify-evenly ">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/demos">Leptos frontend demos</a>
+                            </li>
+                        </ul>
+                    </div>
 
-            </header>
+                </header>
 
-            <main>
-                // all our routes will appear inside <main>
-                <Routes>
-                    <Route path="/" view=HomePageDiv/>
-                    <Route path="/demos" view=DemoNavList>
-                        <RoutesForDemoNestedRoute/>
-                        <Route path=":demo_name" view=DemoDetail>
-                            <Route path="" view=DemoDetail/>
-                        </Route>
+                <main class=css_main_content()>
+                    // all our routes will appear inside <main>
+                    <Routes>
+                        <Route path="/" view=HomePageDiv/>
+                        <Route path="/demos" view=DemoNavList>
+                            <RoutesForDemoNestedRoute/>
+                            <Route path=":demo_name" view=DemoDetail>
+                                <Route path="" view=DemoDetail/>
+                            </Route>
 
-                        <Route
-                            path=""
-                            view=|| {
-                                view! {
-                                    <div class="fixed bg-gray w-full pt-50 mt-50">
-                                        "Select a demo to see the details."
-                                    </div>
+                            <Route
+                                path=""
+                                view=|| {
+                                    view! {
+                                        <div class=css_right_content_detail()>
+                                            "Select a demo to see the details."
+                                        </div>
+                                    }
                                 }
-                            }
-                        />
+                            />
 
-                    </Route>
-                    <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
-                </Routes>
-            </main>
-        </Router>
+                        </Route>
+                        <Route path="/*any" view=|| view! { <h1>"Not Found"</h1> }/>
+                    </Routes>
+                </main>
+            </Router>
+        </div>
     }
 }

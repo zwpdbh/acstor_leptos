@@ -77,7 +77,7 @@ pub fn DynamicAttributes() -> impl IntoView {
                     }
 
                     // set the `style` attribute
-                    style="position: absolute"
+                    style="position: relative"
                     // and toggle individual CSS properties with `style:`
                     style:left=move || format!("{}px", x() + 100)
                     style:background-color=move || format!("rgb({}, {}, 100)", x(), 100)
