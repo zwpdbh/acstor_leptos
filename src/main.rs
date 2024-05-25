@@ -17,9 +17,9 @@ fn main() {
 }
 
 #[component]
-pub fn DemoNav() -> impl IntoView {
+pub fn DemoNavList() -> impl IntoView {
     view! {
-        <div class="fixed inset-y-0 left-0  bg-blue text-white p-4 transition-transform transform -translate-x-full md:translate-x-0 pt-16">
+        <div class="fixed inset-y-0 left-0  bg-blue text-white p-4 pt-16">
             <h2>Demo index</h2>
 
             <ul>
@@ -55,16 +55,17 @@ pub fn DemoNav() -> impl IntoView {
                 </li>
             </ul>
 
-            // <Outlet/> will show the nested child route
-            // we can position this outlet wherever we want
-            // within the layout
-            <Outlet/>
+        // <Outlet/> will show the nested child route
+        // we can position this outlet wherever we want
+        // within the layout
+
         </div>
+        <Outlet/>
     }
 }
 
 #[component]
-pub fn DemoList() -> impl IntoView {
+pub fn DemoDetail() -> impl IntoView {
     // we can access the :id param reactively with `use_params_map`.
     let params = use_params_map();
     let demo_name =
@@ -87,6 +88,24 @@ pub fn DemoList() -> impl IntoView {
 }
 
 #[component]
+pub fn DemoDetailDiv() -> impl IntoView {
+    view! {
+        <div class="bg-gray w-full">
+            <DemoDetail/>
+        </div>
+    }
+}
+
+#[component]
+pub fn HomePageDiv() -> impl IntoView {
+    view! {
+        <div class="bg-gray fixed inset-y-0 left-0 text-white p-4 pt-16 w-full">
+            <h2>"Home Page"</h2>
+        </div>
+    }
+}
+
+#[component]
 fn App() -> impl IntoView {
     view! {
         <Router>
@@ -97,23 +116,22 @@ fn App() -> impl IntoView {
                             <a href="/">Home</a>
                         </li>
                         <li>
-                            <a href="/demos">Demo Index</a>
+                            <a href="/demos">Leptos frontend demos</a>
                         </li>
                     </ul>
                 </div>
 
             </header>
 
-            <main class="">
+            <main>
                 <div>
                     // all our routes will appear inside <main>
                     <Routes>
-
-                        <Route path="/" view=|| view! { <h2>"Home Page"</h2> }/>
-                        <Route path="/demos" view=DemoNav>
+                        <Route path="/" view=HomePageDiv/>
+                        <Route path="/demos" view=DemoNavList>
                             <RoutesForDemoNestedRoute/>
-                            <Route path=":demo_name" view=DemoList>
-                                <Route path="" view=DemoList/>
+                            <Route path=":demo_name" view=DemoDetailDiv>
+                                <Route path="" view=DemoDetailDiv/>
                             </Route>
 
                             <Route
