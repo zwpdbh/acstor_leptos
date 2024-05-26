@@ -21,8 +21,8 @@ pub fn DemoBasicIteration() -> impl IntoView {
         .collect_view();
 
     view! {
-        <h1>"Demo iteration: static views and dynamic views"</h1>
-        <h2>"Static List"</h2>
+        <h1 class="text-h1">"Demo iteration: static views and dynamic views"</h1>
+        <h2 class="text-h2">"Static List"</h2>
         <p>{values.clone()}</p>
         // or we can wrap them in <li>
         <ul>{values.clone().into_iter().map(|n| view! { <li>{n}</li> }).collect::<Vec<_>>()}</ul>
@@ -31,7 +31,7 @@ pub fn DemoBasicIteration() -> impl IntoView {
         <p>"The fact that the list is static doesn’t mean the interface needs to be static. "</p>
         <ul>{counter_buttons}</ul>
 
-        <h2>"Dynamic List"</h2>
+        <h2 class="text-h2">"Dynamic List"</h2>
         <p>"Use this pattern if the rows in your list will change."</p>
         <DynamicList initial_length=5/>
     }
@@ -153,7 +153,7 @@ pub fn DemoComplexDataIteration() -> impl IntoView {
     ]);
 
     view! {
-        <h1>Demo iterating over mote complex data</h1>
+        <h1 class="text-h1">Demo iterating over mote complex data</h1>
 
         // when we click, update each row,
         // doubling its value

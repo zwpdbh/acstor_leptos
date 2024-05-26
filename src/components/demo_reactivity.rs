@@ -4,7 +4,7 @@ use leptos::*;
 #[component]
 pub fn DemoReactivity() -> impl IntoView {
     view! {
-        <h1>Demo Reactivity</h1>
+        <h1 class="text-h1">Demo Reactivity</h1>
         <ul>
             <li>
                 <Demo01/>
@@ -122,7 +122,7 @@ fn CreateAnEffect() -> impl IntoView {
     });
 
     view! {
-        <h1>
+        <h1 class="text-h1">
             <code>"create_effect"</code>
             " Version"
         </h1>
@@ -183,7 +183,7 @@ fn ManualVersion() -> impl IntoView {
     };
 
     view! {
-        <h1>"Manual Version"</h1>
+        <h1 class="text-h1">"Manual Version"</h1>
         <form on:change=on_change>
             <label>"First Name" <input type="text" name="first" node_ref=first/></label>
             <label>"Last Name" <input type="text" name="last" node_ref=last/></label>

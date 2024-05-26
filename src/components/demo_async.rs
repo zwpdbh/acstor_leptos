@@ -7,7 +7,7 @@ use uuid::Uuid;
 #[component]
 pub fn DemoAsync() -> impl IntoView {
     view! {
-        <h1>Demo Async</h1>
+        <p class="text-h1">Demo Async</p>
         <ul>
             <li>
                 <Demo01/>
@@ -79,7 +79,7 @@ pub fn Demo01() -> impl IntoView {
     let is_loading = move || if loading() { "Loading..." } else { "Idle."};
 
     view! {
-        <h3>Load data with resource</h3>
+        <h3 class="text-h3">Load data with resource</h3>
 
         <button on:click=move |_| {
             set_count.update(|n| *n += 1);
@@ -142,7 +142,7 @@ pub fn Demo02V1() -> impl IntoView {
     let b = create_resource(count2, |count| async move { load_b(count).await });
 
     view! {
-        <h3>"Demo: Wait two resources v1"</h3>
+        <h3 class="text-h3">"Demo: Wait two resources v1"</h3>
         {move || match (a.get(), b.get()) {
             (Some(a), Some(b)) => {
                 view! {
@@ -166,7 +166,7 @@ pub fn Demo02V2() -> impl IntoView {
     let b = create_resource(count2, |count| async move { load_b(count).await });
 
     view! {
-        <h3>"Demo: Wait two resources v2"</h3>
+        <h3 class="text-h3">"Demo: Wait two resources v2"</h3>
         <Suspense fallback=move || view! { <p>"Loading..."</p> }>
             <h4>"My Data"</h4>
             <h5>"A"</h5>
@@ -190,7 +190,7 @@ async fn fetch_monkeys(monkey: i32) -> i32 {
 #[component]
 pub fn Demo03() -> impl IntoView {
     view! {
-        <h3>"Demo: use <Await/> for some future to resolve before rendering"</h3>
+        <h3 class="text-h3">"Demo: use <Await/> for some future to resolve before rendering"</h3>
         <Await
             // `future` provides the `Future` to be resolved
             future=|| fetch_monkeys(3)
@@ -227,7 +227,7 @@ pub fn Demo04() -> impl IntoView {
     let user_data = create_resource(tab, |tab| async move { important_api_call(tab).await });
 
     view! {
-        <h3>Demo Transition</h3>
+        <h3 class="text-h3">Demo Transition</h3>
         <div class="buttons">
             <button on:click=move |_| set_tab(0) class:selected=move || tab() == 0>
                 "Tab A"
@@ -273,7 +273,7 @@ pub fn Demo05() -> impl IntoView {
     let input_ref = create_node_ref::<Input>();
 
     view! {
-        <h3>Demo Action</h3>
+        <h3 class="text-h3">Demo Action</h3>
         <form on:submit=move |ev| {
             ev.prevent_default();
             let input = input_ref.get().expect("input to exist");

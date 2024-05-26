@@ -3,7 +3,7 @@ use leptos::*;
 #[component]
 pub fn DemoErrorHandling() -> impl IntoView {
     view! {
-        <h1>Demo error handling</h1>
+        <h1 class="text-h1">Demo error handling</h1>
         <ul>
             <li>
                 <Demo01/>

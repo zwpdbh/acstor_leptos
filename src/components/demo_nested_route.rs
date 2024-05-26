@@ -64,7 +64,7 @@ pub fn FormExample() -> impl IntoView {
         </table>
 
         // <Form/> will navigate whenever submitted
-        <h2>"Manual Submission"</h2>
+        <h2 class="text-h2">"Manual Submission"</h2>
         <Form method="GET" action="">
             // input names determine query string key
             <ul>
@@ -90,7 +90,7 @@ pub fn FormExample() -> impl IntoView {
 
         // This <Form/> uses some JavaScript to submit
         // on every input
-        <h2>"Automatic Submission"</h2>
+        <h2 class="text-h2">"Automatic Submission"</h2>
         <Form method="GET" action="">
             <ul>
                 <li>
@@ -130,7 +130,7 @@ pub fn FormExample() -> impl IntoView {
 #[component]
 pub fn DemoNestedRoute() -> impl IntoView {
     view! {
-        <h3>Demo nested route</h3>
+        <h3 class="text-h3">Demo nested route</h3>
 
         <ul>
             <li>
@@ -156,7 +156,7 @@ fn ContactList() -> impl IntoView {
     view! {
         <div class="contact-list">
             // here's our contact list component itself
-            <h3>"Contacts"</h3>
+            <h3 class="text-h3">"Contacts"</h3>
             <div class="contact-list-contacts">
                 <ul>
                     <li>
@@ -196,7 +196,7 @@ fn ContactInfo() -> impl IntoView {
     };
 
     view! {
-        <h4>{name}</h4>
+        <h4 class="text-h4">{name}</h4>
         <div class="contact-info">
             <div class="tabs">
                 <A href="" exact=true>

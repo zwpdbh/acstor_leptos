@@ -3,7 +3,7 @@ use leptos::*;
 #[component]
 pub fn DemoParentChildrenCommunication() -> impl IntoView {
     view! {
-        <h1>Demo parent children communication</h1>
+        <h1 class="text-h1">Demo parent children communication</h1>
         <p>
             It is easy for the parent to communicate to the child: pass ReadSignal, or a Signal, or even a MaybeSignal as a prob
         </p>

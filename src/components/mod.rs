@@ -17,7 +17,7 @@ pub fn MessageComponent() -> impl IntoView {
 #[component]
 pub fn BasicComponent() -> impl IntoView {
     view! {
-        <h1>"Basic Component (3.1 and 3.2)"</h1>
+        <h1 class="text-h1">"Basic Component (3.1 and 3.2)"</h1>
         <Counter/>
         <DynamicAttributes/>
     }
@@ -47,9 +47,9 @@ pub fn DynamicAttributes() -> impl IntoView {
 
     let double_count = move || count() * 2;
     view! {
-        <h2>Dynamic Classes, Styles and Attributes</h2>
+        <h2 class="text-h2">Dynamic Classes, Styles and Attributes</h2>
 
-        <h3>Dynamic Class</h3>
+        <h3 class="text-h3">Dynamic Class</h3>
         <ol>
             <li>
                 <button
@@ -129,7 +129,7 @@ pub fn ComponentsAndProps() -> impl IntoView {
     let (count, set_count) = create_signal(0);
     let double_count = move || count() * 2;
     view! {
-        <h1>Components And Props</h1>
+        <h1 class="text-h1">Components And Props</h1>
 
         // now we use our component!
         <ul>

@@ -36,7 +36,7 @@ fn css_right_content_detail() -> String {
 pub fn DemoNavList() -> impl IntoView {
     view! {
         <div class=css_left_content_sidebar()>
-            <h2>Demo index</h2>
+            <h2 class="text-h2">Demo index</h2>
 
             <ul>
                 <li>

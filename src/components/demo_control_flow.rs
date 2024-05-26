@@ -3,7 +3,7 @@ use leptos::*;
 #[component]
 pub fn DemoControlFlow() -> impl IntoView {
     view! {
-        <h1>Demo control flow</h1>
+        <h1 class="text-h1">Demo control flow</h1>
         <p>"It is used for should I render this part of the view or not"</p>
 
         <ul>

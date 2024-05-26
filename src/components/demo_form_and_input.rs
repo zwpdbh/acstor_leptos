@@ -24,7 +24,7 @@ pub fn DemoFormAndInput() -> impl IntoView {
 pub fn DemoControlledInputs() -> impl IntoView {
     let (name, set_name) = create_signal("Controlled".to_string());
     view! {
-        <h2>Controlled input</h2>
+        <h2 class="text-h2">Controlled input</h2>
         <input
             type="text"
             on:input=move |ev| {
@@ -61,7 +61,7 @@ pub fn DemoUncontrolledInputs() -> impl IntoView {
     };
 
     view! {
-        <h2>Uncontrolled input</h2>
+        <h2 class="text-h2">Uncontrolled input</h2>
         <form on:submit=on_submit>
             <input type="text" value=name node_ref=input_element/>
             <input type="submit" value="Submit"/>
@@ -93,7 +93,7 @@ pub fn DemoTextArea() -> impl IntoView {
 pub fn DemoSelect() -> impl IntoView {
     let (value, set_value) = create_signal("A".to_string());
     view! {
-        <h2>Demo select</h2>
+        <h2 class="text-h2">Demo select</h2>
         <select on:change=move |ev| {
             let new_value = event_target_value(&ev);
             set_value(new_value);
